@@ -11,7 +11,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-app.use(staticPaths);
+// app.use(staticPaths);
+
+app.use('/css', express.static(path.join(__dirname, 'public/css')));
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
