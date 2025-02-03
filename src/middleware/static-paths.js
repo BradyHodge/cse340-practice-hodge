@@ -4,7 +4,7 @@ import express from 'express';
 const staticPaths = [
    { route: '/css', dir: 'public/css' },
    { route: '/js', dir: 'public/js' },
-   { route: '/images', dir: 'public/images' }
+   { route: '/imgs', dir: 'public/imgs' }
 ];
 
 /**

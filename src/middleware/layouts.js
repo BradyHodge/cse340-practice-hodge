@@ -8,6 +8,9 @@ const layouts = (req, res, next) => {
     const originalRender = res.render;
     
     res.render = (view, options = {}, callback) => {
+        options.MODE = process.env.MODE || 'production';
+        options.PORT = process.env.PORT || 3000;
+        
         if (options.layout === false) {
             return originalRender.call(res, view, options, callback);
         }
