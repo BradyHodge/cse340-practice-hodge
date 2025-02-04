@@ -6,6 +6,7 @@ import baseRoute from './src/routes/index.js';
 import layouts from './src/middleware/layouts.js';
 import staticPaths from './src/middleware/static-paths.js';
 import { notFoundHandler, globalErrorHandler } from './src/middleware/error-handler.js';
+import { devConfig } from './src/middleware/config-mode.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,22 +34,7 @@ app.use(notFoundHandler);
 app.use(globalErrorHandler);
 
 if (MODE.includes('dev')) {
-    const ws = await import('ws');
-    
-    try {
-        const wsPort = parseInt(PORT) + 1;
-        const wsServer = new ws.WebSocketServer({ port: wsPort });
-        
-        wsServer.on('listening', () => {
-            console.log(`WebSocket server is running on port ${wsPort}`);
-        });
-        
-        wsServer.on('error', (error) => {
-            console.error('WebSocket server error:', error);
-        });
-    } catch (error) {
-        console.error('Failed to start WebSocket server:', error);
-    }
+    devConfig(PORT)
 }
 
 app.listen(PORT, () => {

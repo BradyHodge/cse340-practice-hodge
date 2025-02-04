@@ -9,4 +9,9 @@ router.get('/', (req, res) => {
     res.render('index', { title, MODE, PORT });
 });
 
+router.get('/about', (req, res) => {
+    const title = 'About Me';
+    res.render('about', { title, MODE, PORT });
+});
+
 export default router;
