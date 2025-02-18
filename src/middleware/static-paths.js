@@ -1,46 +1,40 @@
 import express from 'express';
+import path from 'path';
 
 /** @type {Array<{route: string, dir: string}|string>} Static path configurations */
 const staticPaths = [
    { route: '/css', dir: 'public/css' },
    { route: '/js', dir: 'public/js' },
-   { route: '/imgs', dir: 'public/imgs' }
+   { route: '/images', dir: 'public/images' }
 ];
 
 /**
- * Extracts the route path from either a string or path object
- * 
- * @param {Object|string} path - Path configuration object or direct path string
- * @returns {string} The route path
+ * Configures static paths for the given Express application.
+ *
+ * @param {Object} app - The Express application instance.
  */
-const getPathKey = (path) => {
-   if (typeof path === 'string') {
-       return path;
-   }
-   return path.route;
-};
-
-const configureStaticPaths = (req, res, next) => {
-    const app = req.app;
-    
-    // A    void duplicates
+const configureStaticPaths = (app) => {
+    // Track registered paths
     const registeredPaths = new Set(app.get('staticPaths') || []);
     
-    staticPaths.forEach((path) => {
-        const pathKey = getPathKey(path);
+    staticPaths.forEach((pathConfig) => {
+        const pathKey = typeof pathConfig === 'string' ? pathConfig : pathConfig.route;
+        
         if (!registeredPaths.has(pathKey)) {
             registeredPaths.add(pathKey);
-            if (typeof path === 'string') {
-                express.static(path)(req, res, next);
+            
+            if (typeof pathConfig === 'string') {
+                // Register the path directly
+                app.use(pathConfig, express.static(pathConfig));
             } else {
-                express.static(path.dir)(req, res, next);
+                // Register the path with the specified route and directory
+                app.use(pathConfig.route, express.static(path.join(process.cwd(), pathConfig.dir)));
             }
         }
     });
 
-    // Update registered paths
+    // Update the app settings with the newly registered paths
     app.set('staticPaths', Array.from(registeredPaths));
-    next();
-}
+};
 
 export default configureStaticPaths;

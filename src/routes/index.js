@@ -1,17 +1,15 @@
 import { Router } from 'express';
 
 const router = Router();
-const MODE = process.env.MODE || 'production';
-const PORT = process.env.PORT || 3000;
-
-router.get('/', (req, res) => {
-    const title = 'Home Page';
-    res.render('index', { title, MODE, PORT });
+ 
+// The home page route
+router.get('/', async (req, res) => {
+    res.render('index', { title: 'Home Page' });
 });
 
-router.get('/about', (req, res) => {
-    const title = 'About Me';
-    res.render('about', { title, MODE, PORT });
+// About page route
+router.get('/about', async (req, res) => {
+    res.render('about', { title: 'About Page' });
 });
 
 export default router;

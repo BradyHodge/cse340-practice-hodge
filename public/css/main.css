@@ -1,7 +1,7 @@
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: rgba(0, 0, 0, 0.2);
     --accent-color: #4a90e2;
   }
   
@@ -41,12 +41,14 @@
     display: block;
   }
   
-  nav {
+  nav ul {
     display: flex;
     gap: 20px;
   }
-  
-  nav a {
+  nav ul li {
+    list-style: none;
+  }
+  nav ul li a {
     color: #333;
     text-decoration: none;
     padding: 8px 16px;

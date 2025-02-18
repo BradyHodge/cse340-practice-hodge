@@ -1,17 +1,6 @@
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<% if (MODE.includes('dev')) { %>
-    <link rel="stylesheet" href="/css/dev.css">
-    <script>
-        const ws = new WebSocket(`ws://127.0.0.1:${parseInt(<%= PORT %>) + 1}`);
-        ws.onclose = () => {
-            setTimeout(() => location.reload(), 2000);
-        };
-    </script>
-<% } %>
-
 <div id="logo">
-    <img src="https://placehold.co/300x80/jpg" alt="Site Logo">
+    <a href="/">
+        <img src="https://placehold.co/300x80/jpg" alt="Site Logo">
+    </a>
 </div>
-<%- include('./navigation') %>
+<%- navHTML %>
