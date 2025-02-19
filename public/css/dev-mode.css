@@ -1,20 +1,4 @@
-body::before {
-    content: "Development Mode";
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ff6b6b;
-    color: white;
-    text-align: center;
-    padding: 8px;
-    font-family: "Segoe UI", Roboto, sans-serif;
+.dev-mode-msg {
     font-weight: bold;
-    z-index: 9999;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-body {
-    padding-top: 40px;
+    text-transform: capitalize;
 }
