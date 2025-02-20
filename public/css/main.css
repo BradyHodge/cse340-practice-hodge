@@ -109,6 +109,11 @@
   #profile-pic:hover {
     transform: scale(1.02);
   }
+
+  .game-card img {
+    max-width: 300px;
+    height: auto;
+  }
   
   footer {
     background: var(--glass-bg);
